@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
@@ -11,9 +12,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $products = Product::all();
+        echo "Hello world";
+        echo ("Helllllo");
+        return view("homepage", compact("products"));
     }
 
     /**
@@ -35,9 +39,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(int $id)
     {
-        //
+        Product::find($id);
+        $product = Product::find($id);
+
+        $products = Product::all();
+        return view('product', ['product'=>$product, 'products'=>$products]);
     }
 
     /**
